@@ -1,4 +1,15 @@
 
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from datetime import date
+import seaborn as sns
+from pydataset import data
+from env import host, user, password
+import os
+
+
 # Make a function named get_iris_data that returns the data from the iris_db on the codeup data science 
 # database as a pandas data frame. The returned data frame should include the actual name of 
 # the species in addition to the species_ids. Obtain you
@@ -11,7 +22,7 @@ def get_iris_data(host = host, user = user, password = password):
     else:
         db = 'iris_db'
         df = pd.read_sql('SELECT * FROM measurements JOIN species USING(species_id)', f'mysql+pymysql://{user}:{password}@{host}/{db}')
-        df.to_csv(filename)
+        df.to_file(filename)
         return df
 
 # Make a function named get_titanic_data that returns the titanic data from the codeup data science database 
@@ -24,5 +35,5 @@ def get_titanic_data(host = host, user = user, password = password):
     else:
         db = 'titanic_db'
         df = pd.read_sql('SELECT * FROM passengers', f'mysql+pymysql://{user}:{password}@{host}/{db}')
-        df.to_csv(filename)
+        df.to_file(filename)
         return df
